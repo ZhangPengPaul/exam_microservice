@@ -1,7 +1,3 @@
 spring:
   application:
     name: config-server
-eureka:
-  client:
-    service-url:
-     defaultZone: http://com.baoluoge.discovery:8761/eureka/
