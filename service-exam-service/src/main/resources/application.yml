@@ -1,0 +1,23 @@
+server:
+  port: 20110
+
+spring:
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      pool-name: springHikariCP
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.6.220:3306/uxue_exam?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: yunzhisheng
+    type: com.zaxxer.hikari.HikariDataSource
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://com.baoluoge.discovery:8761/eureka/
+
+logging:
+  config: classpath:logback.xml

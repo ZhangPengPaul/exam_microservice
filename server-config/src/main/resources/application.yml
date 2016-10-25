@@ -3,7 +3,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/ZhangPengPaul/config-repo
+          uri: https://github.com/ZhangPengPaul/exam_microservice
+          search-paths: config-repo
           username:
           password:
 server:
@@ -12,6 +13,4 @@ server:
 eureka:
   client:
     service-url:
-     defaultZone: http://com.baoluoge.discovery:8761/eureka/
-    healthcheck:
-      enabled: true
+      defaultZone: http://com.baoluoge.discovery:8761/eureka/
