@@ -47,4 +47,26 @@ public class ExamPaperHistoryController {
                 });
         return result;
     }
+
+    @GetMapping(value = "/exerciseAvgScore")
+    public DeferredResult<ObjectNode> userExerciseAvgScore(@RequestParam("userId") int userId,
+                                                           @RequestParam("paperId") int paperId) {
+        DeferredResult<ObjectNode> result = new DeferredResult<>(Constants.REQUEST_TIME_OUT_MILLSECONDS);
+        ObjectMapper mapper = new ObjectMapper();
+
+        Observable.just(examPaperHistoryService.userExerciseAvgScore(userId, paperId))
+                .subscribeOn(Schedulers.io())
+                .subscribe(score -> {
+                    ObjectNode node = mapper.createObjectNode();
+                    node.put("code", BusinessStatusCode.OK);
+                    if (Objects.nonNull(score)) {
+                        node.put("score", score);
+                    } else {
+                        node.put("score", 0F);
+                    }
+
+                    result.setResult(node);
+                });
+        return result;
+    }
 }
