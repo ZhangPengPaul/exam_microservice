@@ -21,3 +21,5 @@ eureka:
 
 logging:
   config: classpath:logback.xml
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000

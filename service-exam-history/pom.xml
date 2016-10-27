@@ -56,6 +56,18 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
         </dependency>
+
+        <!-- 整合hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+
+        <!--&lt;!&ndash; 整合ribbon &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-ribbon</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

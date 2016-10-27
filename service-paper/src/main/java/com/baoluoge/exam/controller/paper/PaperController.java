@@ -13,8 +13,10 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.netflix.rx.RxResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -93,11 +95,6 @@ public class PaperController {
 //                });
 //        return result;
 //    }
-    @GetMapping("/test")
-    public long test() {
-        long times = examPaperHistoryService.userExerciseTimes(272, 1);
-        return times;
-    }
 
     /**
      * 获取试卷列表
@@ -108,9 +105,9 @@ public class PaperController {
      * @return
      */
     @GetMapping(value = "/getExamPaperList")
-    public DeferredResult<ObjectNode> list(@RequestParam("userId") int userId,
-                                           @RequestParam(value = "pn", required = false, defaultValue = "1") int pn,
-                                           @RequestParam(value = "size", required = false, defaultValue = "20") int size) {
+    public SseEmitter list(@RequestParam("userId") int userId,
+                           @RequestParam(value = "pn", required = false, defaultValue = "1") int pn,
+                           @RequestParam(value = "size", required = false, defaultValue = "20") int size) {
         DeferredResult<ObjectNode> result = new DeferredResult<>(Constants.REQUEST_TIME_OUT_MILLSECONDS);
         ObjectMapper mapper = new ObjectMapper();
 
@@ -140,7 +137,7 @@ public class PaperController {
                 })
                 .toList();
 
-        Observable.zip(pageObservable, papersObservable, (paperPage, paperVOList) -> {
+        Observable<ObjectNode> resultObservable = Observable.zip(pageObservable, papersObservable, (paperPage, paperVOList) -> {
             ObjectNode node = mapper.createObjectNode();
             if (Objects.nonNull(paperPage) && CollectionUtils.isNotEmpty(paperVOList)) {
                 node.put("code", BusinessStatusCode.OK);
@@ -154,10 +151,9 @@ public class PaperController {
             }
             return node;
 
-        }).subscribeOn(Schedulers.io())
-                .subscribe(result::setResult);
+        });
 
-        return result;
+        return RxResponse.sse(resultObservable);
     }
 
 
