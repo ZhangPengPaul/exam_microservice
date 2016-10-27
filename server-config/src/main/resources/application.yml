@@ -5,8 +5,8 @@ spring:
         git:
           uri: https://github.com/ZhangPengPaul/exam_microservice
           search-paths: config-repo
-          username:
-          password:
+          username: ZhangPengPaul
+          password: zpxhjs19820402
 server:
   port: 8888
 

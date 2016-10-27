@@ -17,7 +17,7 @@
         <module>hystrix-dashboard</module>
         <module>service-paper</module>
         <module>service-common</module>
-        <module>service-exam-service</module>
+        <module>service-exam-history</module>
     </modules>
 
 

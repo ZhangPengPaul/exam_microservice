@@ -127,8 +127,9 @@ public class PaperController {
                 })
                 .map(examPaperVO -> {
                     // 平均分
-                    //float avgScore = examPaperHistoryService.userExerciseAvgScore(userId, examPaperVO.getPaperId());
-                    //examPaperVO.setAvgScore(avgScore);
+//                    float avgScore = examPaperHistoryService.userExerciseAvgScore(userId, examPaperVO.getPaperId());
+                    float avgScore = examPaperHistoryService.userExerciseAvgScoreFegin(userId, examPaperVO.getPaperId());
+                    examPaperVO.setAvgScore(avgScore);
                     return examPaperVO;
                 })
                 .map(examPaperVO -> {
