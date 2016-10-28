@@ -11,6 +11,16 @@ spring:
     username: root
     password: yunzhisheng
     type: com.zaxxer.hikari.HikariDataSource
+
+  rabbitmq:
+    host: 192.168.6.110
+    port: 5672
+    username: paulzhang
+    password: 123456
+  sleuth:
+    sampler:
+      percentage: 1
+
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
 

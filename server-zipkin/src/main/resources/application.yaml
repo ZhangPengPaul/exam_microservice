@@ -1,0 +1,17 @@
+server:
+  port: 9411
+
+spring:
+  application:
+    name: zipkin-server
+  rabbitmq:
+      host: 192.168.6.110
+      port: 5672
+      username: paulzhang
+      password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://com.baoluoge.discovery:8761/eureka/
+

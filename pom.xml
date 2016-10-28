@@ -18,6 +18,7 @@
         <module>service-paper</module>
         <module>service-common</module>
         <module>service-exam-history</module>
+        <module>server-zipkin</module>
     </modules>
 
 
